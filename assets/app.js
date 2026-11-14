@@ -20,6 +20,7 @@ let allData=null;
 let currentTab='u';
 let currentLabel='songs';
 let searchTimer;
+let activePeriod='all';
 
 function loadData(){
   const bytes=Uint8Array.from(atob(RAW),char=>char.charCodeAt(0));
@@ -70,13 +71,17 @@ function switchTab(key,label){
   void list.offsetWidth;
   list.classList.add('switching');
 
-  renderEras(allData[key]);
+  refreshArchive();
   list.addEventListener('animationend',()=>list.classList.remove('switching'),{once:true});
 }
 
 function renderEras(eraObj,filter=''){
   const list=document.getElementById('era-list');
   const keys=Object.keys(eraObj);
+  const total=keys.reduce((sum,key)=>sum+eraObj[key].length,0);
+  document.getElementById('total-eras').textContent=keys.length;
+  document.getElementById('total-entries').textContent=total.toLocaleString();
+  for(const key of ['u','r','a']) document.getElementById('count-'+key).textContent=Object.values(allData[key]).reduce((sum,items)=>sum+items.length,0).toLocaleString();
 
 
 
@@ -85,15 +90,17 @@ function renderEras(eraObj,filter=''){
   let filtered=eraObj;
   const term=filter.trim().toLowerCase();
 
-  if(term){
-    filtered={};
-    Object.entries(eraObj).forEach(([era,songs])=>{
-      const matched=songs.filter(([name])=>name.toLowerCase().includes(term));
-      if(matched.length || era.toLowerCase().includes(term)){
-        filtered[era]=matched.length ? matched : songs;
-      }
-    });
-  }
+  filtered={};
+  const linkedOnly=document.getElementById('linked-only').checked;
+  Object.entries(eraObj).forEach(([era,songs])=>{
+    const year=Number((ERA_META[era]?.years||'').match(/\d{4}/)?.[0]||2020);
+    if(activePeriod!=='all' && Math.floor(year/10)*10!==Number(activePeriod)) return;
+    let matched=linkedOnly?songs.filter(song=>Boolean(song[3])):songs;
+    if(term && !era.toLowerCase().includes(term)) matched=matched.filter(([name])=>name.toLowerCase().includes(term));
+    if(matched.length) filtered[era]=matched;
+  });
+  const visibleCount=Object.values(filtered).reduce((sum,items)=>sum+items.length,0);
+  document.getElementById('result-count').textContent=Object.keys(filtered).length+' eras / '+visibleCount.toLocaleString()+' entries';
 
   list.innerHTML='';
 
@@ -113,8 +120,8 @@ function renderEras(eraObj,filter=''){
     row.setAttribute('aria-expanded','false');
     const meta=ERA_META[era]||{};
     row.innerHTML=`
-      <div class="era-description"><div class="era-row-name">${escapeHTML(era)}</div>${meta.years?`<div class="era-years">${escapeHTML(meta.years)}</div>`:''}</div>
-      <div class="era-row-right"><span class="era-pill">${songs.length.toLocaleString()} entries</span><span class="era-toggle" aria-hidden="true">+</span></div>`;
+      <div class="era-description"><span class="era-code">${String(keys.indexOf(era)+1).padStart(2,'0')}</span><div class="era-row-name">${escapeHTML(era)}</div></div>
+      <div class="era-years">${escapeHTML(meta.years||'—')}</div><span class="era-pill">${songs.length.toLocaleString()}</span><span class="era-toggle" aria-hidden="true">+</span>`;
 
     const panel=document.createElement('div');
     panel.className='songs-panel';
@@ -202,8 +209,14 @@ function renderSongs(inner,songs){
 
 function onSearch(value){
   clearTimeout(searchTimer);
-  searchTimer=setTimeout(()=>renderEras(allData[currentTab],value),100);
+  searchTimer=setTimeout(refreshArchive,100);
 }
 
+function refreshArchive(){renderEras(allData[currentTab],document.getElementById('search-box').value);}
+function setPeriod(period){
+  activePeriod=period;
+  document.querySelectorAll('.period-filter').forEach(button=>{const active=button.dataset.period===period;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
+  refreshArchive();
+}
 loadData();
-renderEras(allData[currentTab]);
+refreshArchive();

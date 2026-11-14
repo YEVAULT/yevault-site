@@ -6,26 +6,26 @@
   <meta name="theme-color" content="#171719">
   <title>YE VAULT</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="assets/fonts.css?v=4.0.0-type3">
-  <link rel="stylesheet" href="assets/style.css?v=4.0.0-type3">
+  <link rel="stylesheet" href="assets/fonts.css?v=4.0.0-collector">
+  <link rel="stylesheet" href="assets/style.css?v=4.0.0-collector">
 </head>
 <body>
 <header class="site-header">
   <a class="wordmark" href="index.html">YE VAULT</a>
   <nav class="primary-nav" aria-label="Main navigation">
     <a class="header-nav active" href="index.html" aria-current="page">Archive</a>
-    <a class="header-nav" href="album-copies.html"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg>Listen</a>
+    <a class="header-nav" href="album-copies.html"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg>Listening room</a>
   </nav>
   <a class="shop-link" href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">Shop <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
 </header>
 <main id="top">
   <section class="archive-shell" aria-label="Music archive">
-    <h1>Archive</h1>
+    <div class="archive-title"><div><div class="page-path">YE VAULT / INDEX</div><h1>Archive</h1></div><div class="archive-totals"><span><b id="total-eras">—</b> eras</span><span><b id="total-entries">—</b> entries</span></div></div>
     <div class="archive-toolbar">
       <nav class="archive-tabs" aria-label="Archive sections">
-        <button class="nav-tab active" type="button" data-tab="u" aria-pressed="true" onclick="switchTab('u','songs')">Unreleased</button>
-        <button class="nav-tab" type="button" data-tab="r" aria-pressed="false" onclick="switchTab('r','songs')">Released</button>
-        <button class="nav-tab" type="button" data-tab="a" aria-pressed="false" onclick="switchTab('a','copies')">Album copies</button>
+        <button class="nav-tab active" type="button" data-tab="u" aria-pressed="true" onclick="switchTab('u','songs')">Unreleased <span id="count-u"></span></button>
+        <button class="nav-tab" type="button" data-tab="r" aria-pressed="false" onclick="switchTab('r','songs')">Released <span id="count-r"></span></button>
+        <button class="nav-tab" type="button" data-tab="a" aria-pressed="false" onclick="switchTab('a','copies')">Album copies <span id="count-a"></span></button>
       </nav>
       <label class="search-field" for="search-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
@@ -33,7 +33,21 @@
       </label>
     </div>
     <a class="album-preview-link" id="album-preview-link" href="album-copies.html" hidden>Open Listen <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
-    <div class="era-list" id="era-list"></div>
+    <div class="catalog-layout">
+      <aside class="catalog-sidebar" aria-label="Filter archive">
+        <div class="sidebar-heading">Browse by period</div>
+        <div class="period-links">
+          <button type="button" class="period-filter active" data-period="all" aria-pressed="true" onclick="setPeriod('all')">All periods <span>↳</span></button>
+          <button type="button" class="period-filter" data-period="1990" aria-pressed="false" onclick="setPeriod('1990')">1990–1999</button>
+          <button type="button" class="period-filter" data-period="2000" aria-pressed="false" onclick="setPeriod('2000')">2000–2009</button>
+          <button type="button" class="period-filter" data-period="2010" aria-pressed="false" onclick="setPeriod('2010')">2010–2019</button>
+          <button type="button" class="period-filter" data-period="2020" aria-pressed="false" onclick="setPeriod('2020')">2020–present</button>
+        </div>
+        <label class="linked-filter"><input type="checkbox" id="linked-only" onchange="refreshArchive()"> Linked entries only</label>
+        <div class="sidebar-links"><a href="album-copies.html">Listening room <span>↗</span></a><a href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">YE VAULT shop <span>↗</span></a></div>
+      </aside>
+      <div class="catalog-records"><div class="catalog-heading" aria-hidden="true"><span>ERA / PROJECT</span><span>PERIOD</span><span>ENTRIES</span><span></span></div><div class="era-list" id="era-list"></div><div class="catalog-bottom" id="result-count" role="status"></div></div>
+    </div>
   </section>
 </main>
 <footer class="site-footer">
@@ -42,7 +56,7 @@
 </footer>
 <button class="scroll-top" id="scroll-top" type="button" onclick="goToTop()" aria-label="Back to top">↑</button>
 <script src="assets/data.js"></script>
-<script src="assets/eras.js?v=4.0.0-type3"></script>
-<script src="assets/app.js?v=4.0.0-type3"></script>
+<script src="assets/eras.js?v=4.0.0-collector"></script>
+<script src="assets/app.js?v=4.0.0-collector"></script>
 </body>
 </html>
