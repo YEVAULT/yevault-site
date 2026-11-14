@@ -1,0 +1,62 @@
+name: Sync tracker from Google Sheet
+
+on:
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: sync-tracker
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test the importer
+        run: python -m unittest discover -s tests
+      - name: Download and validate all tracker tabs
+        env:
+          TRACKER_SHEET_ID: ${{ secrets.TRACKER_SHEET_ID }}
+        run: python scripts/sync_tracker.py
+      - name: Commit updated tracker
+        id: commit
+        run: |
+          if git diff --quiet -- assets/data.js; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/data.js
+          git commit -m 'Update tracker from Google Sheet'
+          git push
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      # GITHUB_TOKEN commits do not trigger the usual branch-based Pages build.
+      - name: Prepare updated site
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          mkdir _site
+          cp index.html album-copies.html _site/
+          cp -R assets _site/assets
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.commit.outputs.changed == 'true'
+        with:
+          path: _site
+      - name: Publish updated tracker
+        id: deployment
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/deploy-pages@v4
