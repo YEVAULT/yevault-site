@@ -4,17 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0a">
-  <title>Album copies — YE VAULT</title>
+  <title>Listen — YE VAULT</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="assets/style.css?v=4.0.0">
-  <link rel="stylesheet" href="assets/album-copies.css?v=4.0.0">
+  <link rel="stylesheet" href="assets/fonts.css?v=4.0.0-r2">
+  <link rel="stylesheet" href="assets/style.css?v=4.0.0-r2">
+  <link rel="stylesheet" href="assets/album-copies.css?v=4.0.0-r2">
 </head>
 <body>
   <header class="site-header">
     <a class="wordmark" href="index.html">YE VAULT</a>
     <nav class="primary-nav" aria-label="Main navigation">
       <a class="header-nav" href="index.html">Archive</a>
-      <a class="header-nav active" href="album-copies.html" aria-current="page">Album copies</a>
+      <a class="header-nav active" href="album-copies.html" aria-current="page"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg>Listen</a>
     </nav>
     <a class="shop-link" href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">Shop <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
   </header>
@@ -23,18 +24,15 @@
     <a class="back-link" href="index.html">← Back to archive</a>
     <section class="listen-hero">
 
-      <h1>Album copies</h1>
+      <h1>Listen</h1>
     </section>
 
-    <nav class="album-index" aria-label="Jump to an album">
-      <span class="section-label">Albums</span>
-      <div class="album-index-links">
-        <a href="#war-oct-2022"><span>01</span> WAR OCT 2022 <span aria-hidden="true">↓</span></a>
-        <a href="#cuck"><span>02</span> CUCK <span aria-hidden="true">↓</span></a>
-        <a href="#donda-2-2022"><span>03</span> DONDA 2 (2022) <span aria-hidden="true">↓</span></a>
-        <a href="#thank-god-for-drugs"><span>04</span> THANK GOD FOR DRUGS <span aria-hidden="true">↓</span></a>
-      </div>
-    </nav>
+<nav class="listening-shelf" aria-label="Choose an album to listen to">
+<a class="listen-card" href="#war-oct-2022"><div class="listen-card-art"><img src="assets/war-oct-2022-cover.png" alt="" width="240" height="240"><span class="card-play" aria-hidden="true"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg></span></div><strong>WAR</strong><span>OCT 2022</span></a>
+<a class="listen-card" href="#cuck"><div class="listen-card-art"><img src="assets/cuck-cover.webp" alt="" width="240" height="240"><span class="card-play" aria-hidden="true"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg></span></div><strong>CUCK</strong><span>Full album</span></a>
+<a class="listen-card" href="#donda-2-2022"><div class="listen-card-art"><img src="assets/donda-2-cover.jpg" alt="" width="240" height="240"><span class="card-play" aria-hidden="true"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg></span></div><strong>DONDA 2</strong><span>2022</span></a>
+<a class="listen-card" href="#thank-god-for-drugs"><div class="listen-card-art"><img src="assets/tgfd-cover.webp" alt="" width="240" height="240"><span class="card-play" aria-hidden="true"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg></span></div><strong>THANK GOD FOR DRUGS</strong><span>Full album</span></a>
+</nav>
 
     <section class="album-section" id="war-oct-2022" data-album="war" aria-labelledby="war-heading">
       <div class="album-heading">
@@ -77,7 +75,7 @@
         <div class="track-list" aria-label="CUCK tracklist"></div>
         <div class="player-panel">
           <div class="section-label">Now playing</div>
-          <div class="player-art"><img src="https://i.imgur.gg/covers/a63fd304041d7d6216e008a9914181fc9191df5fa05b17ada8ab5a227a0d41b7.jpg" alt="CUCK album artwork" width="1206" height="1206" loading="lazy"></div>
+          <div class="player-art"><img src="assets/cuck-cover.webp" alt="CUCK album artwork" width="1206" height="1206" loading="lazy"></div>
           <div class="now-playing">Choose a track</div>
           <audio class="album-player" controls preload="none" aria-label="CUCK audio player"></audio>
           <div class="player-actions">
@@ -129,7 +127,7 @@
         <div class="track-list" aria-label="THANK GOD FOR DRUGS tracklist"></div>
         <div class="player-panel">
           <div class="section-label">Now playing</div>
-          <div class="player-art"><img src="https://i.imgur.gg/covers/faed640eb84e73c51c2b0cf4f7daf637247a81a5e17dd87e1cbc3c48af7d2a14.jpg" alt="THANK GOD FOR DRUGS album artwork" loading="lazy"></div>
+          <div class="player-art"><img src="assets/tgfd-cover.webp" alt="THANK GOD FOR DRUGS album artwork" loading="lazy"></div>
           <div class="now-playing">Choose a track</div>
           <audio class="album-player" controls preload="none" aria-label="THANK GOD FOR DRUGS audio player"></audio>
           <div class="player-actions">
