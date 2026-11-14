@@ -84,7 +84,7 @@ function initAlbum(section, tracks) {
     button.type = 'button';
     button.className = 'preview-play';
     button.setAttribute('aria-label', 'Play ' + track.title);
-    button.innerHTML = '<span class="preview-number">' + String(index + 1).padStart(2, '0') + '</span><span class="preview-title"></span><span class="preview-indicator">▶</span>';
+    button.innerHTML = '<span class="preview-number">' + String(index + 1).padStart(2, '0') + '</span><span class="preview-title"></span><span class="preview-indicator" aria-hidden="true"></span>';
     button.querySelector('.preview-title').textContent = track.title;
     button.addEventListener('click', () => selectTrack(index));
     const link = document.createElement('a');
@@ -92,7 +92,7 @@ function initAlbum(section, tracks) {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.className = 'preview-host';
-    link.textContent = 'Open ↗';
+    link.innerHTML = 'Open <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>';
     link.setAttribute('aria-label', 'Open ' + track.title + ' on imgur.gg');
     row.append(button, link);
     list.appendChild(row);

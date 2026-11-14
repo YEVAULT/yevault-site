@@ -11,6 +11,10 @@ TIP/DONATION PAGE: https://ko-fi.com/yevault
 
 ## Version History
 
+### v4.0.0
+- Dark archive redesign with burgundy accents and era artwork.
+- Updated album players and mobile layouts.
+
 ### v3.5.0
 - Updated Unreleased, Released, and Album Copies tracker entries.
 
