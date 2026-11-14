@@ -12,7 +12,7 @@ TIP/DONATION PAGE: https://ko-fi.com/yevault
 ## Version History
 
 ### v4.0.0
-- Dark archive redesign with burgundy accents and era artwork.
+- Dark archive redesign with burgundy accents and a typography-led layout.
 - Updated album players and mobile layouts.
 
 ### v3.5.0

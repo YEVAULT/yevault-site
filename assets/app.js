@@ -112,12 +112,9 @@ function renderEras(eraObj,filter=''){
     row.setAttribute('tabindex','0');
     row.setAttribute('aria-expanded','false');
     const meta=ERA_META[era]||{};
-    const placeholder='<span class="era-cover cover-placeholder" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor"><circle cx="20" cy="20" r="16"/><circle cx="20" cy="20" r="5"/><circle cx="20" cy="20" r="1"/></svg></span>';
     row.innerHTML=`
-      ${meta.cover?`<img class="era-cover" src="${escapeHTML(meta.cover)}" alt="" width="68" height="68" loading="lazy">`:placeholder}
-      <div><div class="era-row-name">${escapeHTML(era)}</div>${meta.years?`<div class="era-years">${escapeHTML(meta.years)}</div>`:''}</div>
+      <div class="era-description"><div class="era-row-name">${escapeHTML(era)}</div>${meta.years?`<div class="era-years">${escapeHTML(meta.years)}</div>`:''}</div>
       <div class="era-row-right"><span class="era-pill">${songs.length.toLocaleString()} entries</span><span class="era-toggle" aria-hidden="true">+</span></div>`;
-    row.querySelector('img')?.addEventListener('error',event=>{event.target.outerHTML=placeholder;});
 
     const panel=document.createElement('div');
     panel.className='songs-panel';
