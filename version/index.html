@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Version history — YE VAULT</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    .history-header { --gutter: clamp(14px, 3vw, 28px); }
+    .history-header, .history-header * { box-sizing: border-box; }
+    .history-header { font: 1rem/1.5 var(--sans); --muted: #a5a39d; }
+    .history-header a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    .history-header { border-bottom: 1px solid var(--line); }
+    .history-header .header-inner { width: min(100%, 1480px); margin-inline: auto; padding-inline: var(--gutter); }
+    .history-header .header-inner { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .history-header .wordmark { font: 600 .875rem var(--display); letter-spacing: .12em; text-decoration: none; }
+    .history-header .archive-link { text-transform: uppercase; letter-spacing: .08em; font-size: .875rem; color: var(--muted); text-decoration: none; }
+    .history-header .archive-link:hover, .history-header .wordmark:hover { color: var(--accent); }
+    .history-title { margin: 0; padding: clamp(3rem, 9vw, 7rem) 0 2rem; border-bottom: 1px solid var(--line); font: 500 clamp(1.65rem, 6vw, 5rem)/1.08 var(--display); letter-spacing: -.06em; text-transform: uppercase; }
+    .release { display: grid; grid-template-columns: minmax(8rem, 1fr) 3fr; gap: 1rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+    .release h2 { margin: 0; font: 500 1rem/1.6 var(--display); }
+    .release:first-of-type h2 { color: var(--accent); }
+    .release ul { margin: 0; padding-inline-start: 1.25em; font-size: 1rem; line-height: 1.6; }
+    .release li + li { margin-top: .25rem; }
+    @media (max-width: 560px) {
+      .release { grid-template-columns: 1fr; gap: .5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="history-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="YE Vault home">YE VAULT</a>
+      <a class="archive-link" href="/">Back to the vault</a>
+    </div>
+  </header>
+  <main>
+    <h1 class="history-title">Version history</h1>
+    <section class="release">
+      <h2>v3.6.1</h2>
+      <ul>
+        <li>Declutter</li>
+        <li>Small text changes</li>
+        <li>Some bug fixes</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.6.0</h2>
+      <ul>
+        <li>Added automatic tracker updates</li>
+        <li>Added new contact page</li>
+        <li>Other miscellaneous bug fixes</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.5.0</h2>
+      <ul>
+        <li>Updated Unreleased, Released, and Album Copies tracker entries.</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.4.1</h2>
+      <ul>
+        <li>Added est. year</li>
+        <li>Changed some header wording for more direct understanding</li>
+        <li>Added "Contact Us ↗" link for email contact</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.4.0</h2>
+      <ul>
+        <li>Complete visual overhaul</li>
+        <li>Fixed every bug I was aware of</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.3.0</h2>
+      <ul>
+        <li>Added discovery dates for unreleased songs (if applicable)</li>
+        <li>Also added release dates for released songs/albums</li>
+        <li>Removed YE VAULT SHOP bubble pop up</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.2.1</h2>
+      <ul>
+        <li>Added YE VAULT SHOP icon and bubble pop up</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.2.0</h2>
+      <ul>
+        <li>This version included 2 bug fixes:</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.1.0</h2>
+      <ul>
+        <li>Added donation/tip page to site</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v3.0.0</h2>
+      <ul>
+        <li>UI improvement</li>
+        <li>Introduces smooth animations upon opening the page and switching tabs</li>
+        <li>Adds disclaimer at the bottom of the page reassuring that this page is not affiliated with Ye nor any label</li>
+        <li>Adds version number at the bottom of the page</li>
+        <li>Mobile optimization</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.3.1</h2>
+      <ul>
+        <li>Hotfix: Removed the built-in audio player due to CORS</li>
+        <li>Hotfix: Fixed the issue of a large visit external site symbol appearing</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.3.0</h2>
+      <ul>
+        <li>UI overhaul</li>
+        <li>Mobile viewing optimizations</li>
+        <li>Audio Player built into the site</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.2.1</h2>
+      <ul>
+        <li>Hotfix: Reverted to no-artwork display for stability</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.2.0</h2>
+      <ul>
+        <li>Added album artwork support per era</li>
+        <li>Integrated MusicBrainz Cover Art Archive for official releases</li>
+        <li>Direct image links for unreleased era artwork</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.1.0</h2>
+      <ul>
+        <li>Split into multi-file structure for GitHub Pages (`index.html` + `assets/`)</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v2.0.0</h2>
+      <ul>
+        <li>Full rebuild with tabbed navigation (Unreleased, Released, Album Copies)</li>
+        <li>Era rows with song counts and expandable song lists</li>
+        <li>Quality badges (High Quality, CD Quality, Low Quality, etc.)</li>
+        <li>Hero section with per-era color theming</li>
+        <li>Song count and era count stats</li>
+      </ul>
+    </section>
+    <section class="release">
+      <h2>v1.0.0</h2>
+      <ul>
+        <li>Initial release</li>
+        <li>Single HTML file with embedded data</li>
+        <li>Basic era and song listing</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div>YE VAULT</div>
+    <div>Independent fan-made archive. Not affiliated with Ye or any record label.</div>
+  </footer>
+</body>
+</html>
