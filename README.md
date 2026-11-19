@@ -1,15 +1,18 @@
 # YE VAULT
 
-## IF YOU ARE SEEING THIS, THE PAGE IS CURRENTLY UNDER MAINTENANCE... PLEASE WAIT
 
 A comprehensive archive of every Ye era: unreleased, released, and album copies. Browse songs by era, view quality ratings, and access direct download/stream links.
 
 CHECK OUT YE VAULT SHOP: https://shop.yevault.com
-TIP/DONATION PAGE: https://ko-fi.com/yevault
 
 ---
 
 ## Version History
+
+### v3.6.1
+- Declutter
+- Small text changes
+- Some bug fixes
 
 ### v3.6.0
 - Added automatic tracker updates
