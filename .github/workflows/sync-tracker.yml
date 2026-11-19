@@ -48,10 +48,7 @@ jobs:
       # GITHUB_TOKEN commits do not trigger the usual branch-based Pages build.
       - name: Prepare updated site
         if: steps.commit.outputs.changed == 'true'
-        run: |
-          mkdir _site
-          cp index.html album-copies.html _site/
-          cp -R assets _site/assets
+        run: bash scripts/build_pages.sh
       - uses: actions/upload-pages-artifact@v3
         if: steps.commit.outputs.changed == 'true'
         with:
