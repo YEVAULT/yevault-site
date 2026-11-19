@@ -3,85 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0a0a">
+  <meta name="theme-color" content="#171719">
   <title>YE VAULT</title>
- <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="assets/fonts.css?v=4.0.0-collector">
+  <link rel="stylesheet" href="assets/style.css?v=4.0.0-collector">
 </head>
 <body>
-
 <header class="site-header">
-  <a class="wordmark" href="#top" aria-label="YE Vault home">YE VAULT</a>
-
-  <nav class="primary-nav" aria-label="Archive sections">
-    <button class="nav-tab active" type="button" data-tab="u" onclick="switchTab('u','songs')">Unreleased</button>
-    <button class="nav-tab" type="button" data-tab="r" onclick="switchTab('r','songs')">Released</button>
-    <button class="nav-tab" type="button" data-tab="a" onclick="switchTab('a','links')">Album copies</button>
+  <a class="wordmark" href="index.html">YE VAULT</a>
+  <nav class="primary-nav" aria-label="Main navigation">
+    <a class="header-nav active" href="index.html" aria-current="page">Archive</a>
+    <a class="header-nav" href="album-copies.html"><svg class="nav-play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6z" fill="currentColor"/></svg>Listening room</a>
   </nav>
-
-  <div class="header-links">
-    <a href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">Shop ↗</a>
-    <a href="https://ko-fi.com/yevault" target="_blank" rel="noopener noreferrer">Support Us ↗</a>
-    <a href="mailto:support@yevault.com" target="_blank" rel="noopener noreferrer">Contact Us ↗</a>
-  </div>
+  <a class="shop-link" href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">Shop <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
 </header>
-
 <main id="top">
-  <section class="masthead">
-    <div class="masthead-kicker">Independent fan archive / est. 2026</div>
-    <h1>YE<br>VAULT</h1>
-    <div class="masthead-meta">
-      <div class="archive-counts" aria-label="Archive statistics">
-        <span><strong id="nav-eras">—</strong> eras</span>
-        <span><strong id="nav-songs">—</strong> songs</span>
-      </div>
-    </div>
-  </section>
-
   <section class="archive-shell" aria-label="Music archive">
+    <div class="archive-title"><div><div class="page-path">YE VAULT / INDEX</div><h1>Archive</h1></div><div class="archive-totals"><span><b id="total-eras">—</b> eras</span><span><b id="total-entries">—</b> entries</span></div></div>
     <div class="archive-toolbar">
-      <div><div class="section-label">Archive index</div><a class="album-preview-link" id="album-preview-link" href="album-copies.html" hidden>Listen to album copies ↗</a></div>
+      <nav class="archive-tabs" aria-label="Archive sections">
+        <button class="nav-tab active" type="button" data-tab="u" aria-pressed="true" onclick="switchTab('u','songs')">Unreleased <span id="count-u"></span></button>
+        <button class="nav-tab" type="button" data-tab="r" aria-pressed="false" onclick="switchTab('r','songs')">Released <span id="count-r"></span></button>
+        <button class="nav-tab" type="button" data-tab="a" aria-pressed="false" onclick="switchTab('a','copies')">Album copies <span id="count-a"></span></button>
+      </nav>
       <label class="search-field" for="search-box">
-        <span>Search</span>
-        <input id="search-box" type="search" placeholder="Song title or era" oninput="onSearch(this.value)" autocomplete="off" spellcheck="false">
-        <kbd>/</kbd>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        <input id="search-box" type="search" aria-label="Search title or era" placeholder="Search title or era" oninput="onSearch(this.value)" autocomplete="off" spellcheck="false">
       </label>
     </div>
-
-    <div class="list-head" aria-hidden="true">
-      <span>Era</span>
-      <span>Entries</span>
+    <a class="album-preview-link" id="album-preview-link" href="album-copies.html" hidden>Open Listen <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+    <div class="catalog-layout">
+      <aside class="catalog-sidebar" aria-label="Filter archive">
+        <div class="sidebar-heading">Browse by period</div>
+        <div class="period-links">
+          <button type="button" class="period-filter active" data-period="all" aria-pressed="true" onclick="setPeriod('all')">All periods <span>↳</span></button>
+          <button type="button" class="period-filter" data-period="1990" aria-pressed="false" onclick="setPeriod('1990')">1990–1999</button>
+          <button type="button" class="period-filter" data-period="2000" aria-pressed="false" onclick="setPeriod('2000')">2000–2009</button>
+          <button type="button" class="period-filter" data-period="2010" aria-pressed="false" onclick="setPeriod('2010')">2010–2019</button>
+          <button type="button" class="period-filter" data-period="2020" aria-pressed="false" onclick="setPeriod('2020')">2020–present</button>
+        </div>
+        <label class="linked-filter"><input type="checkbox" id="linked-only" onchange="refreshArchive()"> Linked entries only</label>
+        <div class="sidebar-links"><a href="album-copies.html">Listening room <span>↗</span></a><a href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">YE VAULT shop <span>↗</span></a></div>
+      </aside>
+      <div class="catalog-records"><div class="catalog-heading" aria-hidden="true"><span>ERA / PROJECT</span><span>PERIOD</span><span>ENTRIES</span><span></span></div><div class="era-list" id="era-list"></div><div class="catalog-bottom" id="result-count" role="status"></div></div>
     </div>
-
-    <div class="era-list" id="era-list"></div>
-  </section>
-
-  <section class="support-strip">
-    <div>
-      <span class="section-label">Keep it online</span>
-    </div>
-    <a href="https://ko-fi.com/yevault" target="_blank" rel="noopener noreferrer">Support the vault ↗</a>
   </section>
 </main>
-
 <footer class="site-footer">
-  <div>YE VAULT <span>v3.5.0</span></div>
-  <div>Fan-made archive. Not affiliated with Ye or any record label.</div>
+  <div>YE VAULT <span>· v4.0.0</span></div>
+  <div class="footer-links"><a href="mailto:support@yevault.com">Contact</a><a href="https://ko-fi.com/yevault" target="_blank" rel="noopener noreferrer">Support</a></div>
 </footer>
-
 <button class="scroll-top" id="scroll-top" type="button" onclick="goToTop()" aria-label="Back to top">↑</button>
-
-<div class="shop-notice" id="shop-popup" role="status">
-  <button class="shop-notice-close" type="button" onclick="dismissShopNotice()" aria-label="Dismiss shop notice">×</button>
-  <span>YE VAULT SHOP</span>
-  <p>The shop is now open.</p>
-  <a href="https://shop.yevault.com" target="_blank" rel="noopener noreferrer">Visit shop ↗</a>
-</div>
-
-<script src="assets/data.js?v=20261024-noemoji"></script>
-<script src="assets/app.js?v=20261024-utf8"></script>
+<script src="assets/data.js"></script>
+<script src="assets/eras.js?v=4.0.0-collector"></script>
+<script src="assets/app.js?v=4.0.0-collector"></script>
 </body>
 </html>
