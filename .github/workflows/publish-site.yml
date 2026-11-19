@@ -33,8 +33,10 @@ jobs:
           mkdir _site
           cp index.html album-copies.html _site/
           cp -R assets _site/assets
+          cp -R contact _site/contact
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@v4
+
