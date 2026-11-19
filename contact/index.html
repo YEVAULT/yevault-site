@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Contact — YE VAULT</title>
+  <link rel="icon" type="image/svg+xml" href="https://yevault.com/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&amp;family=Unbounded:wght@400;500;600&amp;display=swap">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0a;
+      --ink: #f1f0eb;
+      --muted: #a5a39d;
+      --line: #262522;
+      --accent: #c7ff37;
+      --display: 'Unbounded', sans-serif;
+      --gutter: clamp(14px, 3vw, 28px);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.5 'DM Sans', sans-serif; }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    header { border-bottom: 1px solid var(--line); }
+    .header-inner, main, footer { width: min(100%, 1480px); margin-inline: auto; padding-inline: var(--gutter); }
+    .header-inner { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .wordmark { font: 600 .875rem var(--display); letter-spacing: .12em; text-decoration: none; }
+    .archive-link { text-transform: uppercase; letter-spacing: .08em; font-size: .875rem; color: var(--muted); text-decoration: none; }
+    .archive-link:hover, .wordmark:hover { color: var(--accent); }
+    .masthead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; padding-block: clamp(3rem, 10vw, 8rem) clamp(2rem, 5vw, 4rem); border-bottom: 1px solid var(--line); }
+    h1 { margin: 0; font: 500 clamp(2.35rem, 10vw, 9rem)/.95 var(--display); letter-spacing: -.075em; }
+    .status { display: inline-flex; align-items: center; gap: .65rem; margin: 0; padding: .55rem .8rem; border: 1px solid var(--line); font-size: .875rem; color: var(--muted); }
+    .status[hidden] { display: none; }
+    .status::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+    .status[data-open="true"] { color: var(--accent); border-color: #465722; }
+    dl { margin: 0; }
+    dl > div { display: grid; grid-template-columns: minmax(15rem, 1fr) 2fr; align-items: baseline; gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
+    dt { font: 500 .875rem/1.5 var(--display); color: var(--muted); }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    .schedule-line { display: block; font-variant-numeric: tabular-nums; }
+    .zone { display: block; color: var(--muted); font-size: .875rem; margin-top: .25rem; }
+    .local-clock { font-variant-numeric: tabular-nums; color: var(--ink); }
+    .email { display: inline-block; color: var(--accent); font-weight: 600; text-underline-offset: .24em; }
+    .email:hover { color: var(--ink); }
+    footer { padding-block: 1.5rem; font-size: .8125rem; color: var(--muted); }
+    @media (max-width: 560px) {
+      dl > div { grid-template-columns: 1fr; gap: .35rem; padding-block: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a class="wordmark" href="https://yevault.com/" aria-label="YE Vault home">YE VAULT</a>
+      <a class="archive-link" href="https://yevault.com/">Archive</a>
+    </div>
+  </header>
+  <main>
+    <div class="masthead">
+      <h1>CONTACT</h1>
+      <p class="status" id="support-status" hidden></p>
+    </div>
+    <dl>
+      <div>
+        <dt>Support email</dt>
+        <dd><a class="email" href="mailto:support@yevault.com">support@yevault.com</a></dd>
+      </div>
+      <div>
+        <dt>Support hours</dt>
+        <dd>
+          <span id="schedule">Monday–Friday, usually 10 AM–7 PM Central Time</span>
+          <span class="zone" id="schedule-zone" hidden></span>
+          <span class="zone" id="clock-row" hidden>Your local time <time class="local-clock" id="local-clock"></time></span>
+        </dd>
+      </div>
+      <div>
+        <dt>Average email response time</dt>
+        <dd>Usually within 2 hours</dd>
+      </div>
+    </dl>
+  </main>
+  <footer>Fan-made archive. Not affiliated with Ye or any record label.</footer>
+  <script>
+    const central = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Chicago', year: 'numeric', month: 'numeric', day: 'numeric',
+      hour: 'numeric', minute: 'numeric', hourCycle: 'h23',
+    });
+    const localTime = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit' });
+    const clockTime = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const localDay = new Intl.DateTimeFormat(undefined, { weekday: 'short' });
+    const localDate = new Intl.DateTimeFormat('en-CA');
+    const localZone = new Intl.DateTimeFormat(undefined, { timeZoneName: 'shortGeneric' });
+    const opens = 10;
+    const closes = 19;
+    const dayLength = 86_400_000;
+
+    function centralParts(instant) {
+      return Object.fromEntries(central.formatToParts(instant).map(({ type, value }) => [type, Number(value)]));
+    }
+
+    function centralInstant(day, hour) {
+      const target = day + hour * 3_600_000;
+      // At 10 AM and 7 PM Central, the wall time is unique even on clock-change days.
+      const guess = target + 6 * 3_600_000;
+      const parts = centralParts(guess);
+      const wallTime = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute);
+      return guess + target - wallTime;
+    }
+
+    function supportHours(now) {
+      const parts = centralParts(now);
+      const today = Date.UTC(parts.year, parts.month - 1, parts.day);
+      const weekday = new Date(today).getUTCDay();
+      const monday = today + (weekday === 0 ? 1 : weekday === 6 ? 2 : 1 - weekday) * dayLength;
+      const windows = [];
+      for (let index = 0; index < 5; index++) {
+        const day = monday + index * dayLength;
+        const start = centralInstant(day, opens);
+        const end = centralInstant(day, closes);
+        const startDay = localDay.format(start);
+        const nextDay = localDate.format(start) !== localDate.format(end);
+        const hours = `${localTime.format(start)}–${localTime.format(end)}${nextDay ? ' the next day' : ''}`;
+        const previous = windows.at(-1);
+        if (previous?.hours === hours) {
+          previous.last = startDay;
+        } else {
+          windows.push({ first: startDay, last: startDay, hours });
+        }
+      }
+      return { windows, open: weekday >= 1 && weekday <= 5 && parts.hour >= opens && parts.hour < closes };
+    }
+
+    function renderHours() {
+      const now = new Date();
+      const { windows, open } = supportHours(now);
+      const schedule = document.getElementById('schedule');
+      const zone = document.getElementById('schedule-zone');
+      const status = document.getElementById('support-status');
+      const lines = windows.map(({ first, last, hours }) => {
+        const line = document.createElement('span');
+        line.className = 'schedule-line';
+        line.textContent = `${first === last ? first : `${first}–${last}`}, ${hours}`;
+        return line;
+      });
+      schedule.replaceChildren(...lines);
+      const zoneName = localZone.formatToParts(now).find(({ type }) => type === 'timeZoneName')?.value;
+      zone.textContent = zoneName ? `Usual hours in your time zone (${zoneName})` : 'Usual hours in your time zone';
+      zone.hidden = false;
+      status.textContent = open ? 'Within support hours' : 'Outside support hours';
+      status.dataset.open = open;
+      status.hidden = false;
+    }
+
+    function renderClock() {
+      const now = new Date();
+      const clock = document.getElementById('local-clock');
+      clock.textContent = clockTime.format(now);
+      clock.dateTime = now.toISOString();
+    }
+
+    renderClock();
+    document.getElementById('clock-row').hidden = false;
+    setInterval(renderClock, 1_000);
+    renderHours();
+    setInterval(renderHours, 30_000);
+  </script>
+</body>
+</html>
